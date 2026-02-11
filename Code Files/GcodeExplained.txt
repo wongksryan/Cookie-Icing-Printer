@@ -9,6 +9,8 @@ Array format:
 Array format:
 [2, x_1, y_1, x_2, y_2]
 
-1 - Arcs/Circles(point, to guide point, to point):
+3 - Arcs/Circles(point, to guide point, to point):
 Array format:
 [3, x_1, y_1, x_2, y_2, x_3, y_3]
+
+The code reads the array, reading the ID first(1, 2, 3) to figure out how to process the sequential inputs in the array.
