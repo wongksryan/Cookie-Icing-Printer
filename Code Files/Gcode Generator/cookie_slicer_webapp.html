@@ -275,6 +275,7 @@
                     <h3 style="margin-bottom: 10px;">Export Array</h3>
                     <textarea id="exportCode" class="export-box" readonly placeholder="Array will appear here"></textarea>
                     <button class="export-btn" onclick="copyToClipboard()">📋 Copy</button>
+                    <button class="export-btn" style="background: #3498db; border-color: #3498db; margin-top: 5px;" onclick="downloadAsText()">⬇️ Download .txt</button>
                 </div>
 
                 <div class="info-box">
@@ -545,8 +546,11 @@
             if (commands.length === 0) {
                 exportBox.value = '';
             } else {
-                const array = '[' + commands.map(cmd => '[' + cmd.join(', ') + ']').join(', ') + ']';
-                exportBox.value = array;
+                const flatArray = [];
+                commands.forEach(cmd => {
+                    flatArray.push(...cmd);
+                });
+                exportBox.value = '[' + flatArray.join(', ') + ']';
             }
         }
 
@@ -703,6 +707,19 @@
                 exportBox.select();
                 document.execCommand('copy');
                 alert('✅ Array copied to clipboard!');
+            }
+        }
+
+        function downloadAsText() {
+            const exportBox = document.getElementById('exportCode');
+            if (exportBox.value) {
+                const element = document.createElement('a');
+                element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(exportBox.value));
+                element.setAttribute('download', 'vex_iq_commands.txt');
+                element.style.display = 'none';
+                document.body.appendChild(element);
+                element.click();
+                document.body.removeChild(element);
             }
         }
 
