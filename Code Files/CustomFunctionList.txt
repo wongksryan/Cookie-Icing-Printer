@@ -11,3 +11,4 @@ Point function(int), parameters (x_1,y_1)
 
 Arc function(int) (x_1,y_1,x_2,y_2,x_3,y_3)
     int for error tracking so the program can recalibrate
+

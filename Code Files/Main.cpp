@@ -1,3 +1,6 @@
+/* Basically useful stuff here
+https://cpp-format-checker.vercel.app/ the literal goat for format checking in ME101
+*/
 #include <cmath>
 #include "iq_cpp.h"
 
