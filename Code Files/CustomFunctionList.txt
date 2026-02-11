@@ -1,0 +1,13 @@
+Startup Calibration function(void)
+
+Recalibration function(void)
+    For during operation to reduce error accumulation
+
+Line function(int), parameters(x_1,y_1,x_2,y_2)
+    int for error tracking so the program can recalibrate
+
+Point function(int), parameters (x_1,y_1)
+    int for error tracking so the program can recalibrate
+
+Arc function(int) (x_1,y_1,x_2,y_2,x_3,y_3)
+    int for error tracking so the program can recalibrate
