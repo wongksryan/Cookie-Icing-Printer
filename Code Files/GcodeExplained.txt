@@ -1,0 +1,14 @@
+Vexcode does NOT take nested arrays. As such, the webapp generates a non-nested array.
+The code takes into account the following formats; instead of having G1, G2 as commands, raw integers are used to reduce file size.
+
+1 - Lines(point to point):
+Array format:
+[1, x_1, y_1, x_2, y_2]
+
+2 - Dot(singular point):
+Array format:
+[2, x_1, y_1, x_2, y_2]
+
+1 - Arcs/Circles(point, to guide point, to point):
+Array format:
+[3, x_1, y_1, x_2, y_2, x_3, y_3]
