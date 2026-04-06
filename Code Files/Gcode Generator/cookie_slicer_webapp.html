@@ -5,12 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cookie Icing Slicer</title>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
+        * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
@@ -20,7 +15,6 @@
             justify-content: center;
             align-items: center;
         }
-
         .container {
             background: white;
             border-radius: 12px;
@@ -29,31 +23,14 @@
             max-width: 1200px;
             width: 100%;
         }
-
-        h1 {
-            color: #333;
-            margin-bottom: 8px;
-            font-size: 28px;
-        }
-
-        .subtitle {
-            color: #666;
-            margin-bottom: 25px;
-            font-size: 14px;
-        }
-
+        h1 { color: #333; margin-bottom: 8px; font-size: 28px; }
+        .subtitle { color: #666; margin-bottom: 25px; font-size: 14px; }
         .main-content {
             display: grid;
-            grid-template-columns: 1fr 320px;
+            grid-template-columns: 1fr 340px;
             gap: 30px;
         }
-
-        .canvas-wrapper {
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-        }
-
+        .canvas-wrapper { display: flex; flex-direction: column; gap: 15px; }
         canvas {
             border: 3px solid #f5576c;
             border-radius: 8px;
@@ -64,13 +41,7 @@
             height: auto;
             max-width: 600px;
         }
-
-        .toolbar {
-            display: flex;
-            gap: 10px;
-            flex-wrap: wrap;
-        }
-
+        .toolbar { display: flex; gap: 10px; flex-wrap: wrap; }
         button {
             padding: 10px 16px;
             border: 2px solid #f5576c;
@@ -82,35 +53,16 @@
             transition: all 0.3s ease;
             font-size: 14px;
         }
-
-        button:hover {
-            background: #f5576c;
-            color: white;
-            transform: translateY(-2px);
-        }
-
-        button.active {
-            background: #f5576c;
-            color: white;
-        }
-
-        button.danger {
-            border-color: #e74c3c;
-            color: #e74c3c;
-        }
-
-        button.danger:hover {
-            background: #e74c3c;
-            color: white;
-        }
-
+        button:hover { background: #f5576c; color: white; transform: translateY(-2px); }
+        button.active { background: #f5576c; color: white; }
+        button.danger { border-color: #e74c3c; color: #e74c3c; }
+        button.danger:hover { background: #e74c3c; color: white; }
         .sidebar {
             background: #fff9fa;
             padding: 20px;
             border-radius: 8px;
             border: 2px solid #f5e6e8;
         }
-
         .sidebar h3 {
             color: #333;
             font-size: 16px;
@@ -118,7 +70,6 @@
             padding-bottom: 10px;
             border-bottom: 2px solid #f5576c;
         }
-
         .grid-info {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -126,76 +77,71 @@
             margin-bottom: 15px;
             font-size: 13px;
         }
-
         .grid-stat {
             background: white;
             padding: 10px;
             border-radius: 4px;
             border-left: 3px solid #f5576c;
         }
-
-        .grid-stat label {
-            display: block;
-            color: #999;
-            font-size: 11px;
-            margin-bottom: 3px;
-        }
-
-        .grid-stat value {
-            display: block;
-            color: #333;
-            font-weight: 600;
-            font-size: 16px;
-        }
-
+        .grid-stat label { display: block; color: #999; font-size: 11px; margin-bottom: 3px; }
+        .grid-stat value { display: block; color: #333; font-weight: 600; font-size: 16px; }
         .command-list {
             background: white;
             border: 1px solid #ddd;
             border-radius: 6px;
             padding: 12px;
-            max-height: 220px;
+            max-height: 200px;
             overflow-y: auto;
             font-size: 11px;
             font-family: 'Courier New', monospace;
             color: #333;
             line-height: 1.6;
         }
-
         .command-list.empty {
             color: #999;
             font-style: italic;
             text-align: center;
             padding: 20px 12px;
         }
-
         .command-item {
             padding: 4px 0;
             border-bottom: 1px solid #f5f5f5;
+            display: flex;
+            align-items: center;
+            gap: 6px;
         }
-
-        .command-item:last-child {
-            border-bottom: none;
+        .command-item:last-child { border-bottom: none; }
+        .cmd-color-swatch {
+            display: inline-block;
+            width: 10px; height: 10px;
+            border-radius: 2px;
+            border: 1px solid #ccc;
+            flex-shrink: 0;
         }
-
-        .export-section {
-            margin-top: 20px;
-        }
-
+        .export-section { margin-top: 20px; }
         .export-box {
             background: white;
             border: 1px solid #ddd;
             border-radius: 6px;
             padding: 10px;
             margin-top: 10px;
-            max-height: 120px;
+            max-height: 100px;
             overflow-y: auto;
             font-size: 10px;
             font-family: 'Courier New', monospace;
             color: #333;
             word-break: break-all;
             line-height: 1.3;
+            width: 100%;
+            resize: none;
         }
-
+        .export-label {
+            font-size: 11px;
+            color: #666;
+            font-weight: 600;
+            margin-top: 8px;
+            display: block;
+        }
         .export-btn {
             width: 100%;
             margin-top: 10px;
@@ -204,12 +150,7 @@
             border-color: #27ae60;
             padding: 10px;
         }
-
-        .export-btn:hover {
-            background: #229954;
-            border-color: #229954;
-        }
-
+        .export-btn:hover { background: #229954; border-color: #229954; }
         .info-box {
             background: #fff3cd;
             border-left: 4px solid #ffc107;
@@ -220,510 +161,787 @@
             color: #856404;
             line-height: 1.5;
         }
+        .color-panel {
+            background: white;
+            border: 1px solid #f5e6e8;
+            border-radius: 6px;
+            padding: 12px;
+            margin-bottom: 15px;
+        }
+        .color-panel h4 { font-size: 13px; color: #333; margin-bottom: 10px; font-weight: 700; }
+        .color-slots { display: flex; flex-direction: column; gap: 8px; }
+        .color-slot { display: flex; align-items: center; gap: 8px; }
+        .color-slot-btn {
+            padding: 5px 10px;
+            border-radius: 5px;
+            border: 2px solid transparent;
+            font-size: 12px;
+            font-weight: 700;
+            cursor: pointer;
+            flex: 1;
+            text-align: left;
+            transition: all 0.2s;
+        }
+        .color-slot-btn.selected {
+            border-color: #333;
+            box-shadow: 0 0 0 2px rgba(0,0,0,0.15);
+        }
+        .color-slot input[type="color"] {
+            width: 32px; height: 28px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            padding: 0;
+            background: none;
+        }
+        .preview-section {
+            margin-top: 30px;
+            padding-top: 25px;
+            border-top: 2px solid #f5e6e8;
+        }
+        .preview-title {
+            color: #333;
+            font-size: 18px;
+            margin-bottom: 6px;
+        }
+        .preview-subtitle {
+            color: #888;
+            font-size: 12px;
+            margin-bottom: 14px;
+        }
+        #previewCanvas {
+            border: 3px solid #f5576c;
+            border-radius: 8px;
+            background: white;
+            display: block;
+            width: 100%;
+            max-width: 600px;
+            height: auto;
+        }
 
         @media (max-width: 768px) {
-            .main-content {
-                grid-template-columns: 1fr;
-            }
-            
-            h1 {
-                font-size: 24px;
-            }
-
-            canvas {
-                max-width: 100%;
-            }
+            .main-content { grid-template-columns: 1fr; }
+            h1 { font-size: 24px; }
+            canvas { max-width: 100%; }
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1>🍪 Cookie Icing Slicer</h1>
-        <p class="subtitle">Design circular cookie patterns and generate VEX IQ icing commands</p>
-
-        <div class="main-content">
-            <div class="canvas-wrapper">
-                <canvas id="canvas"></canvas>
-                
-                <div class="toolbar">
-                    <button id="lineBtn" class="active">📏 Line</button>
-                    <button id="dotBtn">⚫ Dot</button>
-                    <button id="arcBtn">🔄 Arc</button>
-                    <button id="undoBtn">↶ Undo</button>
-                    <button id="clearBtn" class="danger">🗑️ Clear All</button>
+<div class="container">
+    <h1>Cookie Icing Slicer</h1>
+    <p class="subtitle">Design circular cookie patterns and generate VEX IQ icing commands</p>
+    <div class="main-content">
+        <div class="canvas-wrapper">
+            <canvas id="canvas"></canvas>
+            <div class="toolbar">
+                <button id="lineBtn" class="active">Line</button>
+                <button id="dotBtn">Dot</button>
+                <button id="arcBtn">Arc</button>
+                <button id="undoBtn">Undo</button>
+                <button id="clearBtn" class="danger">Clear All</button>
+            </div>
+        </div>
+        <div class="sidebar">
+            <h3>Commands</h3>
+            <div class="grid-info">
+                <div class="grid-stat">
+                    <label>Total Commands</label>
+                    <value id="commandCount">0</value>
+                </div>
+                <div class="grid-stat">
+                    <label>Coordinate Range</label>
+                    <value>±12</value>
                 </div>
             </div>
-
-            <div class="sidebar">
-                <h3>Commands</h3>
-                <div class="grid-info">
-                    <div class="grid-stat">
-                        <label>Total Commands</label>
-                        <value id="commandCount">0</value>
+            <div class="color-panel">
+                <h4>Active Color</h4>
+                <div class="color-slots">
+                    <div class="color-slot">
+                        <button class="color-slot-btn selected" id="colorBtn0" style="background:#f5576c;color:white;">Color 1</button>
+                        <input type="color" id="colorPicker0" value="#f5576c">
                     </div>
-                    <div class="grid-stat">
-                        <label>Grid Size</label>
-                        <value>24×24</value>
+                    <div class="color-slot">
+                        <button class="color-slot-btn" id="colorBtn1" style="background:#3498db;color:white;">Color 2</button>
+                        <input type="color" id="colorPicker1" value="#3498db">
+                    </div>
+                    <div class="color-slot">
+                        <button class="color-slot-btn" id="colorBtn2" style="background:#27ae60;color:white;">Color 3</button>
+                        <input type="color" id="colorPicker2" value="#27ae60">
                     </div>
                 </div>
-
-                <div class="command-list empty" id="commandList">
-                    No commands yet
-                </div>
-
-                <div class="export-section">
-                    <h3 style="margin-bottom: 10px;">Export Array</h3>
-                    <textarea id="exportCode" class="export-box" readonly placeholder="Array will appear here"></textarea>
-                    <button class="export-btn" onclick="copyToClipboard()">📋 Copy</button>
-                    <button class="export-btn" style="background: #3498db; border-color: #3498db; margin-top: 5px;" onclick="downloadAsText()">⬇️ Download .txt</button>
-                </div>
-
-                <div class="info-box">
-                    <strong>🎨 Drawing Tips:</strong><br>
-                    • Line: click start, then end<br>
-                    • Dot: click once<br>
-                    • Arc: start → center → end<br>
-                    • Drag points to move them
-                </div>
+            </div>
+            <div class="command-list empty" id="commandList">No commands yet</div>
+            <div class="export-section">
+                <h3 style="margin-bottom:6px;">Export Arrays</h3>
+                <span class="export-label">Commands (1=line, 2=dot):</span>
+                <textarea id="exportCode" class="export-box" readonly placeholder="Array will appear here"></textarea>
+                <span class="export-label">Colors (VEX IQ hue 0–360, grouped):</span>
+                <textarea id="exportColors" class="export-box" readonly placeholder="Color array will appear here"></textarea>
+                <button class="export-btn" onclick="copyToClipboard()">Copy Commands</button>
+                <button class="export-btn" style="background:#9b59b6;border-color:#9b59b6;margin-top:5px;" onclick="copyColorsToClipboard()">Copy Colors</button>
+                <button class="export-btn" style="background:#3498db;border-color:#3498db;margin-top:5px;" onclick="downloadAsText()">Download .txt</button>
+            </div>
+            <div class="info-box">
+                <strong>Drawing Tips:</strong><br>
+                • Line: click start → click end<br>
+                • Dot: single click<br>
+                • Arc: click start → click mid → click end<br>
+                • Drag any point handle to move it<br>
+                • Select color before drawing
             </div>
         </div>
     </div>
 
-    <script>
-        const canvas = document.getElementById('canvas');
-        const ctx = canvas.getContext('2d');
-        
-        // Grid configuration
-        const GRID_SIZE = 24;
-        const RADIUS = 12;
-        let CELL_SIZE = 18;
-        let currentTool = 'line';
-        let commands = [];
-        let isDrawing = false;
-        let startPoint = null;
-        let arcCenter = null;
-        let currentPreview = null;
-        let hoveredPoint = null;
-        let draggingCommandIndex = null;
-        let draggingPointIndex = null;
+    <!-- ── Export Preview ─────────────────────────────────────────────────── -->
+    <div class="preview-section">
+        <h3 class="preview-title">Export Preview</h3>
+        <p class="preview-subtitle">What your export array actually draws (1=line, 2=dot, coords ±12)</p>
+        <canvas id="previewCanvas"></canvas>
+    </div>
+</div>
 
-        function resizeCanvas() {
-            const size = GRID_SIZE * CELL_SIZE + 40;
-            canvas.width = size;
-            canvas.height = size;
+<script>
+    const canvas = document.getElementById('canvas');
+    const ctx = canvas.getContext('2d');
+
+    // Grid: 25 dots, center index=12, export coords = index-12 → range -12..12
+    const GRID_SIZE = 25;
+    const RADIUS = 12;
+    const GRID_CENTER = 12;
+    let CELL_SIZE = 18;
+
+    // ── State ────────────────────────────────────────────────────────────────────
+    let currentTool = 'line';
+    let commands = []; // { type:1|2|3, args:[grid coords...], color:'#hex' }
+
+    // Drawing in-progress state
+    let drawStep = 0;       // 0=idle, 1=have start, 2=have start+mid(arc only)
+    let drawPts = [];       // accumulated clicks for current shape
+
+    // Drag state
+    let dragActive = false;
+    let dragCmdIdx = null;
+    let dragPtIdx = null;
+    let mouseDownGrid = null;
+    let mouseIsDown = false;
+
+    // Hover
+    let hoverGrid = null;
+
+    // Colors
+    const NUM_COLORS = 3;
+    let colorValues = ['#f5576c', '#3498db', '#27ae60'];
+    let selectedColorIndex = 0;
+
+    // ── Color helpers ────────────────────────────────────────────────────────────
+    function getContrastColor(hex) {
+        const r = parseInt(hex.slice(1,3),16);
+        const g = parseInt(hex.slice(3,5),16);
+        const b = parseInt(hex.slice(5,7),16);
+        return (r*0.299 + g*0.587 + b*0.114) > 150 ? '#333' : 'white';
+    }
+
+    function hexToHue(hex) {
+        const r = parseInt(hex.slice(1,3),16)/255;
+        const g = parseInt(hex.slice(3,5),16)/255;
+        const b = parseInt(hex.slice(5,7),16)/255;
+        const max = Math.max(r,g,b), min = Math.min(r,g,b), d = max-min;
+        if (d === 0) return 0;
+        let h;
+        if (max===r)      h = ((g-b)/d + (g<b?6:0))/6;
+        else if (max===g) h = ((b-r)/d + 2)/6;
+        else              h = ((r-g)/d + 4)/6;
+        return Math.round(h*360);
+    }
+
+    function updateColorButtons() {
+        for (let i = 0; i < NUM_COLORS; i++) {
+            const btn = document.getElementById('colorBtn'+i);
+            const pk  = document.getElementById('colorPicker'+i);
+            btn.style.background = colorValues[i];
+            btn.style.color = getContrastColor(colorValues[i]);
+            btn.classList.toggle('selected', i === selectedColorIndex);
+            pk.value = colorValues[i];
+        }
+    }
+
+    for (let i = 0; i < NUM_COLORS; i++) {
+        document.getElementById('colorBtn'+i).addEventListener('click', () => {
+            selectedColorIndex = i;
+            updateColorButtons();
+        });
+        document.getElementById('colorPicker'+i).addEventListener('input', e => {
+            colorValues[i] = e.target.value;
+            updateColorButtons();
             redraw();
-        }
+            updateExport();
+        });
+    }
 
-        function screenToGrid(x, y) {
-            const centerX = canvas.width / 2;
-            const centerY = canvas.height / 2;
-            const gridX = Math.round((x - centerX) / CELL_SIZE) + RADIUS;
-            const gridY = Math.round((y - centerY) / CELL_SIZE) + RADIUS;
-            return { x: gridX, y: gridY };
-        }
+    // ── Coordinate helpers ───────────────────────────────────────────────────────
+    function resizeCanvas() {
+        const size = GRID_SIZE * CELL_SIZE + 40;
+        canvas.width = size;
+        canvas.height = size;
+        redraw();
+    }
 
-        function gridToScreen(gridX, gridY) {
-            const centerX = canvas.width / 2;
-            const centerY = canvas.height / 2;
-            const x = (gridX - RADIUS) * CELL_SIZE + centerX;
-            const y = (gridY - RADIUS) * CELL_SIZE + centerY;
-            return { x, y };
-        }
+    function screenToGrid(sx, sy) {
+        const cx = canvas.width/2, cy = canvas.height/2;
+        const gx = Math.round((sx-cx)/CELL_SIZE) + GRID_CENTER;
+        const gy = Math.round((sy-cy)/CELL_SIZE) + GRID_CENTER;
+        return clampToCircle(gx, gy);
+    }
 
-        function isInCircle(gridX, gridY) {
-            const dx = gridX - RADIUS;
-            const dy = gridY - RADIUS;
-            return dx * dx + dy * dy <= RADIUS * RADIUS;
-        }
+    function gridToScreen(gx, gy) {
+        const cx = canvas.width/2, cy = canvas.height/2;
+        return { x: (gx-GRID_CENTER)*CELL_SIZE+cx, y: (gy-GRID_CENTER)*CELL_SIZE+cy };
+    }
 
-        function drawGrid() {
-            ctx.fillStyle = 'white';
-            ctx.fillRect(0, 0, canvas.width, canvas.height);
+    function isInCircle(gx, gy) {
+        const dx=gx-GRID_CENTER, dy=gy-GRID_CENTER;
+        return dx*dx+dy*dy <= (RADIUS-0.5)*(RADIUS-0.5);
+    }
 
-            const centerX = canvas.width / 2;
-            const centerY = canvas.height / 2;
+    function clampToCircle(gx, gy) {
+        const dx=gx-GRID_CENTER, dy=gy-GRID_CENTER;
+        const dist=Math.sqrt(dx*dx+dy*dy), maxR=RADIUS-0.5;
+        if (dist>maxR && dist>0)
+            return { x:Math.round(GRID_CENTER+dx/dist*maxR), y:Math.round(GRID_CENTER+dy/dist*maxR) };
+        return { x:gx, y:gy };
+    }
 
-            ctx.strokeStyle = '#f5576c';
-            ctx.lineWidth = 2;
-            ctx.beginPath();
-            ctx.arc(centerX, centerY, RADIUS * CELL_SIZE, 0, Math.PI * 2);
-            ctx.stroke();
+    function toExp(v) { return v-GRID_CENTER; }
+    function toExpY(v) { return -(v-GRID_CENTER); }
 
-            ctx.fillStyle = '#e8e8e8';
-            ctx.strokeStyle = '#f0f0f0';
-            ctx.lineWidth = 0.5;
-
-            for (let i = 0; i < GRID_SIZE; i++) {
-                for (let j = 0; j < GRID_SIZE; j++) {
-                    if (isInCircle(i, j)) {
-                        const { x, y } = gridToScreen(i, j);
-                        
-                        if (i < GRID_SIZE - 1 && isInCircle(i + 1, j)) {
-                            ctx.beginPath();
-                            const { x: x2 } = gridToScreen(i + 1, j);
-                            ctx.moveTo(x, y);
-                            ctx.lineTo(x2, y);
-                            ctx.stroke();
-                        }
-                        if (j < GRID_SIZE - 1 && isInCircle(i, j + 1)) {
-                            ctx.beginPath();
-                            const { y: y2 } = gridToScreen(i, j + 1);
-                            ctx.moveTo(x, y);
-                            ctx.lineTo(x, y2);
-                            ctx.stroke();
-                        }
-
-                        ctx.fillRect(x - 1.5, y - 1.5, 3, 3);
-                    }
+    // ── Find draggable point near coords ────────────────────────────────────────
+    // Returns {cmdIdx, ptIdx} of the closest existing control point within threshold
+    function findPointAt(gx, gy, threshold=1) {
+        let best = null, bestDist = Infinity;
+        for (let ci=0; ci<commands.length; ci++) {
+            const {type, args} = commands[ci];
+            let pts = [];
+            if (type===1) pts = [[args[0],args[1]],[args[2],args[3]]];
+            else if (type===2) pts = [[args[0],args[1]]];
+            else if (type===3) pts = [[args[0],args[1]],[args[2],args[3]],[args[4],args[5]]];
+            for (let pi=0; pi<pts.length; pi++) {
+                const dx=pts[pi][0]-gx, dy=pts[pi][1]-gy;
+                const d=Math.sqrt(dx*dx+dy*dy);
+                if (d<=threshold && d<bestDist) {
+                    bestDist=d; best={cmdIdx:ci, ptIdx:pi};
                 }
             }
         }
+        return best;
+    }
 
-        function calculateArcCenter(x1, y1, x2, y2, x3, y3) {
-            const ax = x2 - x1, ay = y2 - y1;
-            const bx = x3 - x1, by = y3 - y1;
-            const d = 2 * (ax * by - ay * bx);
-            if (Math.abs(d) < 1e-6) return null;
-            const ux = (by * (ax * ax + ay * ay) - ay * (bx * bx + by * by)) / d;
-            const uy = (ax * (bx * bx + by * by) - bx * (ax * ax + ay * ay)) / d;
-            return { x: x1 + ux, y: y1 + uy };
+    // ── Arc math ─────────────────────────────────────────────────────────────────
+    // All arc functions work in grid-space coordinates.
+    // The "mid point" (mx,my) is a point ON the arc, used to pick which of the
+    // two possible arcs between (x1,y1) and (x2,y2) we want.
+
+    function calcArcCenter(x1,y1, x2,y2, x3,y3) {
+        // Circumcenter of three points
+        const ax=x2-x1,ay=y2-y1,bx=x3-x1,by=y3-y1;
+        const d=2*(ax*by-ay*bx);
+        if (Math.abs(d)<1e-6) return null;
+        const ux=(by*(ax*ax+ay*ay)-ay*(bx*bx+by*by))/d;
+        const uy=(ax*(bx*bx+by*by)-bx*(ax*ax+ay*ay))/d;
+        return {x:x1+ux, y:y1+uy};
+    }
+
+    // Returns arc parameters for the arc through p1→mid→p2.
+    // ccwScreen: direction flag for ctx.arc (canvas Y-down)
+    // ccwGrid:   direction flag for grid-space point generation (math Y-up)
+    function arcParams(x1,y1,mx,my,x2,y2) {
+        const c=calcArcCenter(x1,y1,mx,my,x2,y2);
+        if (!c) return null;
+        const r=Math.sqrt((x1-c.x)**2+(y1-c.y)**2);
+        const a1=Math.atan2(y1-c.y, x1-c.x);
+        const a2=Math.atan2(y2-c.y, x2-c.x);
+        const am=Math.atan2(my-c.y, mx-c.x);
+        let cwSweep = a2-a1; if(cwSweep<0) cwSweep+=2*Math.PI;
+        let mSweep  = am-a1; if(mSweep <0) mSweep +=2*Math.PI;
+        // midpoint inside CW sweep → arc should go CW in grid space
+        const ccwGrid   = mSweep > cwSweep;  // true = CCW in math coords
+        const ccwScreen = !ccwGrid;           // canvas Y is flipped, so invert
+        return {c, r, a1, a2, ccwGrid, ccwScreen};
+    }
+
+    function drawArcFromThreePoints(x1,y1,mx,my,x2,y2, color, lineWidth) {
+        const p=arcParams(x1,y1,mx,my,x2,y2);
+        if (!p) {
+            const s1=gridToScreen(x1,y1), s2=gridToScreen(x2,y2);
+            ctx.beginPath(); ctx.moveTo(s1.x,s1.y); ctx.lineTo(s2.x,s2.y);
+            ctx.strokeStyle=color; ctx.lineWidth=lineWidth; ctx.stroke();
+            return;
+        }
+        const sc=gridToScreen(p.c.x, p.c.y);
+        ctx.beginPath();
+        ctx.arc(sc.x, sc.y, p.r*CELL_SIZE, p.a1, p.a2, p.ccwScreen);
+        ctx.strokeStyle=color; ctx.lineWidth=lineWidth; ctx.stroke();
+    }
+
+    function arcToExportLines(x1,y1,mx,my,x2,y2) {
+        const p=arcParams(x1,y1,mx,my,x2,y2);
+        if (!p) return [[toExp(x1),-toExp(y1),toExp(x2),-toExp(y2)]];
+        const {c,r,a1,a2,ccwScreen}=p;
+        let sweep;
+        if (!ccwScreen) { sweep=a2-a1; if(sweep<0) sweep+=2*Math.PI; }
+        else            { sweep=a1-a2; if(sweep<0) sweep+=2*Math.PI; }
+
+        // Use a fixed number of chord segments — snap endpoints to grid.
+        // This gives diagonal lines with no staircase, at the cost of
+        // not hitting every integer point on the arc.
+        const segments = Math.max(8, Math.round(r * sweep * 1.2));
+        const pts = [];
+        for (let i=0; i<=segments; i++) {
+            const t = i/segments;
+            const a = ccwScreen ? a1-sweep*t : a1+sweep*t;
+            const ix = Math.round(c.x + r*Math.cos(a));
+            const iy = Math.round(c.y + r*Math.sin(a));
+            pts.push([ix, iy]);
         }
 
-        function calculateArcRadius(x1, y1, x2, y2, x3, y3) {
-            const center = calculateArcCenter(x1, y1, x2, y2, x3, y3);
-            if (!center) return null;
-            return Math.sqrt((x1 - center.x) ** 2 + (y1 - center.y) ** 2);
+        // Deduplicate consecutive identical points, then emit segments
+        const lines = [];
+        let prev = pts[0];
+        for (let i=1; i<pts.length; i++) {
+            const cur = pts[i];
+            if (cur[0]===prev[0] && cur[1]===prev[1]) continue;
+            lines.push([prev[0]-GRID_CENTER, -(prev[1]-GRID_CENTER),
+                         cur[0]-GRID_CENTER, -(cur[1]-GRID_CENTER)]);
+            prev = cur;
         }
+        return lines.length ? lines : [[toExp(x1),-toExp(y1),toExp(x2),-toExp(y2)]];
+    }
 
-        function drawCircularArc(x1, y1, cx, cy, x2, y2, context, width = 2, color = '#f5576c') {
-            const radius = calculateArcRadius(x1, y1, cx, cy, x2, y2);
-            const center = calculateArcCenter(x1, y1, cx, cy, x2, y2);
-            
-            if (center && radius) {
-                const angle1 = Math.atan2(y1 - center.y, x1 - center.x);
-                const angle2 = Math.atan2(y2 - center.y, x2 - center.x);
-                
-                context.strokeStyle = color;
-                context.lineWidth = width;
-                context.beginPath();
-                context.arc(center.x, center.y, radius, angle1, angle2, false);
-                context.stroke();
+    // ── Draw ─────────────────────────────────────────────────────────────────────
+    function drawGrid() {
+        ctx.fillStyle='white';
+        ctx.fillRect(0,0,canvas.width,canvas.height);
+        const cx=canvas.width/2, cy=canvas.height/2;
+        ctx.strokeStyle='#f5576c'; ctx.lineWidth=2;
+        ctx.beginPath(); ctx.arc(cx,cy,RADIUS*CELL_SIZE,0,Math.PI*2); ctx.stroke();
+        ctx.fillStyle='#e8e8e8'; ctx.strokeStyle='#f0f0f0'; ctx.lineWidth=0.5;
+        for (let i=0;i<GRID_SIZE;i++) {
+            for (let j=0;j<GRID_SIZE;j++) {
+                if (!isInCircle(i,j)) continue;
+                const {x,y}=gridToScreen(i,j);
+                if (i<GRID_SIZE-1&&isInCircle(i+1,j)) {
+                    const {x:x2}=gridToScreen(i+1,j);
+                    ctx.beginPath(); ctx.moveTo(x,y); ctx.lineTo(x2,y); ctx.stroke();
+                }
+                if (j<GRID_SIZE-1&&isInCircle(i,j+1)) {
+                    const {y:y2}=gridToScreen(i,j+1);
+                    ctx.beginPath(); ctx.moveTo(x,y); ctx.lineTo(x,y2); ctx.stroke();
+                }
+                ctx.fillRect(x-1.5,y-1.5,3,3);
             }
         }
+    }
 
-        function drawCommands() {
-            commands.forEach((cmd, index) => {
-                drawCommand(cmd, index === commands.length - 1);
-            });
+    function lighten(hex) {
+        const r=Math.min(255,parseInt(hex.slice(1,3),16)+50);
+        const g=Math.min(255,parseInt(hex.slice(3,5),16)+50);
+        const b=Math.min(255,parseInt(hex.slice(5,7),16)+50);
+        return `rgb(${r},${g},${b})`;
+    }
+
+    function drawHandle(gx, gy, color, size=4) {
+        const {x,y}=gridToScreen(gx,gy);
+        ctx.fillStyle=color;
+        ctx.fillRect(x-size,y-size,size*2,size*2);
+    }
+
+    function drawCmd(cmd) {
+        const {type,args,color}=cmd;
+        ctx.strokeStyle=color; ctx.fillStyle=color; ctx.lineWidth=2;
+        if (type===1) {
+            const s=gridToScreen(args[0],args[1]), e=gridToScreen(args[2],args[3]);
+            ctx.beginPath(); ctx.moveTo(s.x,s.y); ctx.lineTo(e.x,e.y); ctx.stroke();
+            drawHandle(args[0],args[1],color);
+            drawHandle(args[2],args[3],color);
+        } else if (type===2) {
+            const {x,y}=gridToScreen(args[0],args[1]);
+            ctx.beginPath(); ctx.arc(x,y,5,0,Math.PI*2); ctx.fill();
+        } else if (type===3) {
+            drawArcFromThreePoints(args[0],args[1],args[2],args[3],args[4],args[5],color,2);
+            drawHandle(args[0],args[1],color);
+            drawHandle(args[2],args[3],lighten(color)); // mid point lighter
+            drawHandle(args[4],args[5],color);
         }
+    }
 
-        function drawCommand(cmd, highlight = false) {
-            const [type, ...args] = cmd;
-            
-            ctx.lineWidth = highlight ? 3 : 2;
-            ctx.fillStyle = highlight ? '#ff6b9d' : '#f5576c';
-            ctx.strokeStyle = highlight ? '#ff6b9d' : '#f5576c';
+    function drawPreview() {
+        // Draw ghost line/arc based on in-progress drawing state
+        if (drawStep===0 || !hoverGrid) return;
+        ctx.globalAlpha=0.45;
+        const pts=drawPts;
+        if (currentTool==='line' && drawStep===1) {
+            const s=gridToScreen(pts[0].x,pts[0].y), e=gridToScreen(hoverGrid.x,hoverGrid.y);
+            ctx.strokeStyle='#888'; ctx.lineWidth=2;
+            ctx.beginPath(); ctx.moveTo(s.x,s.y); ctx.lineTo(e.x,e.y); ctx.stroke();
+        } else if (currentTool==='arc') {
+            if (drawStep===1) {
+                // Show line from start to cursor (picking mid point)
+                const s=gridToScreen(pts[0].x,pts[0].y), e=gridToScreen(hoverGrid.x,hoverGrid.y);
+                ctx.strokeStyle='#888'; ctx.lineWidth=1.5; ctx.setLineDash([4,4]);
+                ctx.beginPath(); ctx.moveTo(s.x,s.y); ctx.lineTo(e.x,e.y); ctx.stroke();
+                ctx.setLineDash([]);
+            } else if (drawStep===2) {
+                // Show arc preview start→mid→cursor
+                drawArcFromThreePoints(pts[0].x,pts[0].y,pts[1].x,pts[1].y,hoverGrid.x,hoverGrid.y,'#888',2);
+            }
+        }
+        ctx.globalAlpha=1;
+    }
+
+    function drawHover() {
+        if (!hoverGrid||!isInCircle(hoverGrid.x,hoverGrid.y)) return;
+        const {x,y}=gridToScreen(hoverGrid.x,hoverGrid.y);
+        ctx.fillStyle='rgba(245,87,108,0.4)';
+        ctx.beginPath(); ctx.arc(x,y,7,0,Math.PI*2); ctx.fill();
+    }
+
+    function drawInProgressHandles() {
+        drawPts.forEach(p => {
+            const {x,y}=gridToScreen(p.x,p.y);
+            ctx.fillStyle='#f5576c';
+            ctx.beginPath(); ctx.arc(x,y,5,0,Math.PI*2); ctx.fill();
+        });
+    }
+
+    function redraw() {
+        drawGrid();
+        commands.forEach(cmd=>drawCmd(cmd));
+        drawPreview();
+        drawInProgressHandles();
+        drawHover();
+    }
+
+    // ── Command list & export ────────────────────────────────────────────────────
+    function updateCommandList() {
+        const list=document.getElementById('commandList');
+        document.getElementById('commandCount').textContent=commands.length;
+        if (commands.length===0) {
+            list.className='command-list empty';
+            list.innerHTML='No commands yet';
+        } else {
+            list.className='command-list';
+            const names={1:'LINE',2:'DOT',3:'ARC'};
+            list.innerHTML=commands.map((cmd,i)=>{
+                const ex=cmd.args.map(v=>toExp(v));
+                return `<div class="command-item">
+                    <span class="cmd-color-swatch" style="background:${cmd.color}"></span>
+                    [${i}] ${names[cmd.type]}: ${ex.join(', ')}
+                </div>`;
+            }).join('');
+        }
+        updateExport();
+    }
+
+    function buildExportArrays() {
+        if (commands.length===0) return {cmdArray:[],colorArray:[]};
+        // Group by color, preserving first-appearance order
+        const colorOrder=[], groups={};
+        commands.forEach(cmd=>{
+            if (!groups[cmd.color]) { groups[cmd.color]=[]; colorOrder.push(cmd.color); }
+            groups[cmd.color].push(cmd);
+        });
+        const cmdFlat=[], colorFlat=[];
+        colorOrder.forEach(c=>{
+            groups[c].forEach(cmd=>{
+                const {type,args}=cmd;
+                if (type===1) {
+                    cmdFlat.push(1,toExp(args[0]),-toExp(args[1]),toExp(args[2]),-toExp(args[3]));
+                    colorFlat.push(c);
+                } else if (type===2) {
+                    cmdFlat.push(2,toExp(args[0]),-toExp(args[1]));
+                    colorFlat.push(c);
+                } else if (type===3) {
+                    const segs=arcToExportLines(args[0],args[1],args[2],args[3],args[4],args[5]);
+                    segs.forEach(([lx1,ly1,lx2,ly2])=>{
+                        cmdFlat.push(1,lx1,ly1,lx2,ly2);
+                        colorFlat.push(c);
+                    });
+                }
+            });
+        });
+        return {cmdArray:cmdFlat, colorArray:colorFlat};
+    }
+
+    // ── Export Preview Canvas ────────────────────────────────────────────────────
+    const previewCanvas = document.getElementById('previewCanvas');
+    const pctx = previewCanvas.getContext('2d');
+    const PREV_RANGE = 12;   // coords go -12..12
+    const PREV_SIZE  = 480;
+    const PREV_PAD   = 30;
+    previewCanvas.width  = PREV_SIZE;
+    previewCanvas.height = PREV_SIZE;
+
+    function prevToScreen(x, y) {
+        // map -12..12 → PAD..SIZE-PAD
+        const span = PREV_SIZE - PREV_PAD*2;
+        return {
+            x: PREV_PAD + (x + PREV_RANGE) / (PREV_RANGE*2) * span,
+            y: PREV_PAD + (PREV_RANGE - y) / (PREV_RANGE*2) * span  // Y flipped
+        };
+    }
+
+    function hueToHex(h) {
+        // Convert 0-360 hue (full saturation/value) to hex for display
+        h = h % 360;
+        const s=1, v=0.85;
+        const c=v*s, x=c*(1-Math.abs((h/60)%2-1)), m=v-c;
+        let r,g,b;
+        if      (h<60)  {r=c;g=x;b=0;}
+        else if (h<120) {r=x;g=c;b=0;}
+        else if (h<180) {r=0;g=c;b=x;}
+        else if (h<240) {r=0;g=x;b=c;}
+        else if (h<300) {r=x;g=0;b=c;}
+        else            {r=c;g=0;b=x;}
+        const toHex=n=>Math.round((n+m)*255).toString(16).padStart(2,'0');
+        return '#'+toHex(r)+toHex(g)+toHex(b);
+    }
+
+    function drawPreviewCanvas(cmdArray, colorArray) {
+        pctx.fillStyle='white';
+        pctx.fillRect(0,0,PREV_SIZE,PREV_SIZE);
+
+        // Grid
+        pctx.strokeStyle='#f0f0f0'; pctx.lineWidth=0.5;
+        for (let i=-PREV_RANGE; i<=PREV_RANGE; i++) {
+            const {x:sx, y:sy0} = prevToScreen(i,-PREV_RANGE);
+            const {y:sy1} = prevToScreen(i, PREV_RANGE);
+            const {x:sx0,y:sy} = prevToScreen(-PREV_RANGE,i);
+            const {x:sx1}      = prevToScreen( PREV_RANGE,i);
+            pctx.beginPath(); pctx.moveTo(sx,sy0); pctx.lineTo(sx,sy1); pctx.stroke();
+            pctx.beginPath(); pctx.moveTo(sx0,sy); pctx.lineTo(sx1,sy); pctx.stroke();
+        }
+        // Axes
+        pctx.strokeStyle='#ddd'; pctx.lineWidth=1;
+        const {x:ax,y:ay0}=prevToScreen(0,-PREV_RANGE), {y:ay1}=prevToScreen(0,PREV_RANGE);
+        const {x:ax0,y:ay}=prevToScreen(-PREV_RANGE,0), {x:ax1}=prevToScreen(PREV_RANGE,0);
+        pctx.beginPath(); pctx.moveTo(ax,ay0); pctx.lineTo(ax,ay1); pctx.stroke();
+        pctx.beginPath(); pctx.moveTo(ax0,ay); pctx.lineTo(ax1,ay); pctx.stroke();
+
+        // Border circle
+        const ctr=prevToScreen(0,0);
+        const edgePx=prevToScreen(12,0);
+        const radiusPx=edgePx.x-ctr.x;
+        pctx.strokeStyle='#f5576c'; pctx.lineWidth=1.5;
+        pctx.beginPath(); pctx.arc(ctr.x,ctr.y,radiusPx,0,Math.PI*2); pctx.stroke();
+
+        if (!cmdArray || cmdArray.length===0) return;
+
+        // Parse and draw
+        // colorArray is parallel: one hue per command entry
+        let colorIdx = 0;
+        let i = 0;
+        while (i < cmdArray.length) {
+            const type = cmdArray[i];
+            const hue  = colorArray[colorIdx] !== undefined ? colorArray[colorIdx] : 0;
+            const color = hueToHex(hue);
 
             if (type === 1) {
-                const { x: x1, y: y1 } = gridToScreen(args[0], args[1]);
-                const { x: x2, y: y2 } = gridToScreen(args[2], args[3]);
-                ctx.beginPath();
-                ctx.moveTo(x1, y1);
-                ctx.lineTo(x2, y2);
-                ctx.stroke();
-                ctx.fillRect(x1 - 3, y1 - 3, 6, 6);
-                ctx.fillRect(x2 - 3, y2 - 3, 6, 6);
-            } 
-            else if (type === 2) {
-                const { x, y } = gridToScreen(args[0], args[1]);
-                ctx.beginPath();
-                ctx.arc(x, y, 5, 0, Math.PI * 2);
-                ctx.fill();
-            } 
-            else if (type === 3) {
-                const { x: x1, y: y1 } = gridToScreen(args[0], args[1]);
-                const { x: cx, y: cy } = gridToScreen(args[2], args[3]);
-                const { x: x2, y: y2 } = gridToScreen(args[4], args[5]);
-                
-                drawCircularArc(x1, y1, cx, cy, x2, y2, ctx, highlight ? 3 : 2, highlight ? '#ff6b9d' : '#f5576c');
-                
-                ctx.fillStyle = highlight ? '#ff6b9d' : '#f5576c';
-                ctx.fillRect(x1 - 3, y1 - 3, 6, 6);
-                ctx.fillRect(cx - 3, cy - 3, 6, 6);
-                ctx.fillRect(x2 - 3, y2 - 3, 6, 6);
+                // line: next 4 values are x1,y1,x2,y2
+                const x1=cmdArray[i+1], y1=cmdArray[i+2], x2=cmdArray[i+3], y2=cmdArray[i+4];
+                const s=prevToScreen(x1,y1), e=prevToScreen(x2,y2);
+                pctx.beginPath(); pctx.moveTo(s.x,s.y); pctx.lineTo(e.x,e.y);
+                pctx.strokeStyle=color; pctx.lineWidth=1.5; pctx.stroke();
+                i+=5; colorIdx++;
+            } else if (type === 2) {
+                // dot: next 2 values are x,y
+                const x=cmdArray[i+1], y=cmdArray[i+2];
+                const s=prevToScreen(x,y);
+                pctx.beginPath(); pctx.arc(s.x,s.y,3,0,Math.PI*2);
+                pctx.fillStyle=color; pctx.fill();
+                i+=3; colorIdx++;
+            } else {
+                // unknown — skip
+                i++;
             }
         }
+    }
 
-        function drawPreview() {
-            if (currentPreview) {
-                const [type, ...args] = currentPreview;
-                ctx.globalAlpha = 0.5;
-
-                if (type === 1) {
-                    const { x: x1, y: y1 } = gridToScreen(args[0], args[1]);
-                    const { x: x2, y: y2 } = gridToScreen(args[2], args[3]);
-                    ctx.strokeStyle = '#ddd';
-                    ctx.lineWidth = 2;
-                    ctx.beginPath();
-                    ctx.moveTo(x1, y1);
-                    ctx.lineTo(x2, y2);
-                    ctx.stroke();
-                } 
-                else if (type === 3) {
-                    const { x: x1, y: y1 } = gridToScreen(args[0], args[1]);
-                    const { x: cx, y: cy } = gridToScreen(args[2], args[3]);
-                    const { x: x2, y: y2 } = gridToScreen(args[4], args[5]);
-                    drawCircularArc(x1, y1, cx, cy, x2, y2, ctx, 2, '#ddd');
-                }
-
-                ctx.globalAlpha = 1;
-            }
+    function updateExport() {
+        const eb=document.getElementById('exportCode');
+        const ec=document.getElementById('exportColors');
+        if (commands.length===0) {
+            eb.value=''; ec.value='';
+            drawPreviewCanvas([], []);
+            return;
         }
+        const {cmdArray,colorArray}=buildExportArrays();
+        eb.value='['+cmdArray.join(', ')+']';
+        const hues=colorArray.map(c=>hexToHue(c));
+        ec.value='['+hues.join(', ')+']';
+        drawPreviewCanvas(cmdArray, hues);
+    }
 
-        function drawHoveredPoint() {
-            if (hoveredPoint && isInCircle(hoveredPoint.x, hoveredPoint.y)) {
-                const { x, y } = gridToScreen(hoveredPoint.x, hoveredPoint.y);
-                ctx.fillStyle = '#ff6b9d';
-                ctx.beginPath();
-                ctx.arc(x, y, 7, 0, Math.PI * 2);
-                ctx.fill();
-            }
-        }
+    // ── Mouse ────────────────────────────────────────────────────────────────────
+    function getGridFromEvent(e) {
+        const rect=canvas.getBoundingClientRect();
+        const sx=(e.clientX-rect.left)*(canvas.width/rect.width);
+        const sy=(e.clientY-rect.top)*(canvas.height/rect.height);
+        return screenToGrid(sx,sy);
+    }
 
-        function redraw() {
-            drawGrid();
-            drawCommands();
-            drawPreview();
-            drawHoveredPoint();
-        }
+    canvas.addEventListener('mousedown', e => {
+        const g=getGridFromEvent(e);
+        if (!isInCircle(g.x,g.y)) return;
+        mouseIsDown=true;
+        mouseDownGrid=g;
+        dragActive=false;
+        dragCmdIdx=null;
+        dragPtIdx=null;
+    });
 
-        function findPointAtCoords(gridX, gridY, threshold = 1) {
-            for (let cmdIdx = 0; cmdIdx < commands.length; cmdIdx++) {
-                const cmd = commands[cmdIdx];
-                const [type, ...args] = cmd;
-                
-                let points = [];
-                if (type === 1) {
-                    points = [[args[0], args[1]], [args[2], args[3]]];
-                } else if (type === 2) {
-                    points = [[args[0], args[1]]];
-                } else if (type === 3) {
-                    points = [[args[0], args[1]], [args[2], args[3]], [args[4], args[5]]];
-                }
-                
-                for (let ptIdx = 0; ptIdx < points.length; ptIdx++) {
-                    const [px, py] = points[ptIdx];
-                    if (Math.abs(px - gridX) <= threshold && Math.abs(py - gridY) <= threshold) {
-                        return { cmdIdx, ptIdx };
+    canvas.addEventListener('mousemove', e => {
+        const g=getGridFromEvent(e);
+        hoverGrid=g;
+
+        if (mouseIsDown && !dragActive) {
+            // Check if mouse has moved to a different grid cell
+            if (mouseDownGrid && (g.x!==mouseDownGrid.x || g.y!==mouseDownGrid.y)) {
+                // Try to start drag from the mousedown position
+                // Only if not mid-draw (drawStep===0)
+                if (drawStep===0) {
+                    const pt=findPointAt(mouseDownGrid.x,mouseDownGrid.y,1);
+                    if (pt) {
+                        dragActive=true;
+                        dragCmdIdx=pt.cmdIdx;
+                        dragPtIdx=pt.ptIdx;
                     }
                 }
             }
-            return null;
         }
 
-        function updateCommandList() {
-            const list = document.getElementById('commandList');
-            const count = document.getElementById('commandCount');
-            
-            count.textContent = commands.length;
-
-            if (commands.length === 0) {
-                list.className = 'command-list empty';
-                list.innerHTML = 'No commands yet';
-            } else {
-                list.className = 'command-list';
-                list.innerHTML = commands.map((cmd, i) => {
-                    const typeNames = { 1: 'LINE', 2: 'DOT', 3: 'ARC' };
-                    return `<div class="command-item">[${i}] ${typeNames[cmd[0]]}: ${cmd.slice(1).join(', ')}</div>`;
-                }).join('');
-            }
-
-            updateExport();
-        }
-
-        function updateExport() {
-            const exportBox = document.getElementById('exportCode');
-            if (commands.length === 0) {
-                exportBox.value = '';
-            } else {
-                const flatArray = [];
-                commands.forEach(cmd => {
-                    flatArray.push(...cmd);
-                });
-                exportBox.value = '[' + flatArray.join(', ') + ']';
-            }
-        }
-
-        canvas.addEventListener('mousedown', (e) => {
-            const rect = canvas.getBoundingClientRect();
-            const scaleX = canvas.width / rect.width;
-            const scaleY = canvas.height / rect.height;
-            const x = (e.clientX - rect.left) * scaleX;
-            const y = (e.clientY - rect.top) * scaleY;
-            const gridCoords = screenToGrid(x, y);
-
-            if (!isInCircle(gridCoords.x, gridCoords.y)) return;
-
-            const pointAt = findPointAtCoords(gridCoords.x, gridCoords.y);
-            if (pointAt) {
-                draggingCommandIndex = pointAt.cmdIdx;
-                draggingPointIndex = pointAt.ptIdx;
-                isDrawing = true;
-                return;
-            }
-
-            isDrawing = true;
-
-            if (currentTool === 'line') {
-                if (!startPoint) {
-                    startPoint = gridCoords;
-                } else {
-                    commands.push([1, startPoint.x, startPoint.y, gridCoords.x, gridCoords.y]);
-                    startPoint = null;
-                    updateCommandList();
-                    redraw();
-                }
-            } 
-            else if (currentTool === 'dot') {
-                commands.push([2, gridCoords.x, gridCoords.y]);
+        if (dragActive && dragCmdIdx!==null) {
+            if (isInCircle(g.x,g.y)) {
+                const cmd=commands[dragCmdIdx];
+                const a=[...cmd.args];
+                a[dragPtIdx*2]=g.x;
+                a[dragPtIdx*2+1]=g.y;
+                commands[dragCmdIdx]={...cmd,args:a};
                 updateCommandList();
-                redraw();
-            } 
-            else if (currentTool === 'arc') {
-                if (!startPoint) {
-                    startPoint = gridCoords;
-                } else if (!arcCenter) {
-                    arcCenter = gridCoords;
-                } else {
-                    commands.push([3, startPoint.x, startPoint.y, arcCenter.x, arcCenter.y, gridCoords.x, gridCoords.y]);
-                    arcCenter = null;
-                    startPoint = null;
-                    updateCommandList();
-                    redraw();
-                }
             }
-        });
+        }
 
-        canvas.addEventListener('mousemove', (e) => {
-            const rect = canvas.getBoundingClientRect();
-            const scaleX = canvas.width / rect.width;
-            const scaleY = canvas.height / rect.height;
-            const x = (e.clientX - rect.left) * scaleX;
-            const y = (e.clientY - rect.top) * scaleY;
-            const gridCoords = screenToGrid(x, y);
+        redraw();
+    });
 
-            hoveredPoint = gridCoords;
+    // mouseup on document so releasing outside canvas always clears mouse state
+    document.addEventListener('mouseup', e => {
+        const wasDragging=dragActive;
 
-            if (isDrawing && draggingCommandIndex !== null && draggingPointIndex !== null) {
-                const cmd = commands[draggingCommandIndex];
-                const [type, ...args] = cmd;
-                
-                if (isInCircle(gridCoords.x, gridCoords.y)) {
-                    const argsCopy = [...args];
-                    const ptIdx = draggingPointIndex * 2;
-                    argsCopy[ptIdx] = gridCoords.x;
-                    argsCopy[ptIdx + 1] = gridCoords.y;
-                    commands[draggingCommandIndex] = [type, ...argsCopy];
-                    updateCommandList();
-                    redraw();
-                }
-                return;
-            }
+        mouseIsDown=false;
+        dragActive=false;
+        dragCmdIdx=null;
+        dragPtIdx=null;
+        mouseDownGrid=null;
 
-            if (!isInCircle(gridCoords.x, gridCoords.y)) {
-                currentPreview = null;
-                redraw();
-                return;
-            }
+        // Only register a tool click if released on canvas and not dragging
+        const rect=canvas.getBoundingClientRect();
+        const onCanvas = e.clientX>=rect.left && e.clientX<=rect.right && e.clientY>=rect.top && e.clientY<=rect.bottom;
+        if (!wasDragging && onCanvas) {
+            const g=getGridFromEvent(e);
+            if (isInCircle(g.x,g.y)) handleToolClick(g);
+        }
+        redraw();
+    });
 
-            if (currentTool === 'line' && startPoint) {
-                currentPreview = [1, startPoint.x, startPoint.y, gridCoords.x, gridCoords.y];
-            } 
-            else if (currentTool === 'arc') {
-                if (startPoint && arcCenter) {
-                    currentPreview = [3, startPoint.x, startPoint.y, arcCenter.x, arcCenter.y, gridCoords.x, gridCoords.y];
-                }
+    // mouse leaving canvas resets hover
+    canvas.addEventListener('mouseleave', ()=>{
+        hoverGrid=null;
+        redraw();
+    });
+
+    function handleToolClick(g) {
+        const color=colorValues[selectedColorIndex];
+        if (currentTool==='line') {
+            if (drawStep===0) {
+                drawPts=[g]; drawStep=1;
             } else {
-                currentPreview = null;
-            }
-
-            redraw();
-        });
-
-        canvas.addEventListener('mouseup', () => {
-            isDrawing = false;
-            draggingCommandIndex = null;
-            draggingPointIndex = null;
-        });
-
-        document.getElementById('lineBtn').addEventListener('click', function() {
-            currentTool = 'line';
-            startPoint = null;
-            arcCenter = null;
-            document.querySelectorAll('button').forEach(b => b.classList.remove('active'));
-            this.classList.add('active');
-            redraw();
-        });
-
-        document.getElementById('dotBtn').addEventListener('click', function() {
-            currentTool = 'dot';
-            startPoint = null;
-            arcCenter = null;
-            document.querySelectorAll('button').forEach(b => b.classList.remove('active'));
-            this.classList.add('active');
-            redraw();
-        });
-
-        document.getElementById('arcBtn').addEventListener('click', function() {
-            currentTool = 'arc';
-            startPoint = null;
-            arcCenter = null;
-            document.querySelectorAll('button').forEach(b => b.classList.remove('active'));
-            this.classList.add('active');
-            redraw();
-        });
-
-        document.getElementById('undoBtn').addEventListener('click', () => {
-            if (commands.length > 0) {
-                commands.pop();
+                commands.push({type:1, args:[drawPts[0].x,drawPts[0].y,g.x,g.y], color});
+                drawPts=[]; drawStep=0;
                 updateCommandList();
-                redraw();
             }
-        });
-
-        document.getElementById('clearBtn').addEventListener('click', () => {
-            if (confirm('Clear all commands?')) {
-                commands = [];
-                startPoint = null;
-                arcCenter = null;
+        } else if (currentTool==='dot') {
+            commands.push({type:2, args:[g.x,g.y], color});
+            updateCommandList();
+        } else if (currentTool==='arc') {
+            if (drawStep===0) {
+                drawPts=[g]; drawStep=1;
+            } else if (drawStep===1) {
+                drawPts.push(g); drawStep=2;
+            } else {
+                commands.push({type:3, args:[drawPts[0].x,drawPts[0].y,drawPts[1].x,drawPts[1].y,g.x,g.y], color});
+                drawPts=[]; drawStep=0;
                 updateCommandList();
-                redraw();
-            }
-        });
-
-        function copyToClipboard() {
-            const exportBox = document.getElementById('exportCode');
-            if (exportBox.value) {
-                exportBox.select();
-                document.execCommand('copy');
-                alert('✅ Array copied to clipboard!');
             }
         }
+    }
 
-        function downloadAsText() {
-            const exportBox = document.getElementById('exportCode');
-            if (exportBox.value) {
-                const element = document.createElement('a');
-                element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(exportBox.value));
-                element.setAttribute('download', 'vex_iq_commands.txt');
-                element.style.display = 'none';
-                document.body.appendChild(element);
-                element.click();
-                document.body.removeChild(element);
-            }
+    // ── Toolbar ──────────────────────────────────────────────────────────────────
+    function setTool(tool) {
+        currentTool=tool;
+        drawStep=0; drawPts=[];
+        document.querySelectorAll('.toolbar button').forEach(b=>b.classList.remove('active'));
+        document.getElementById(tool+'Btn').classList.add('active');
+        updateColorButtons();
+        redraw();
+    }
+
+    document.getElementById('lineBtn').addEventListener('click',()=>setTool('line'));
+    document.getElementById('dotBtn').addEventListener('click',()=>setTool('dot'));
+    document.getElementById('arcBtn').addEventListener('click',()=>setTool('arc'));
+
+    document.getElementById('undoBtn').addEventListener('click',()=>{
+        if (drawStep>0) {
+            // Cancel in-progress draw first
+            drawStep=0; drawPts=[];
+        } else if (commands.length>0) {
+            commands.pop();
+            updateCommandList();
         }
+        redraw();
+    });
 
-        resizeCanvas();
-    </script>
+    document.getElementById('clearBtn').addEventListener('click',()=>{
+        commands=[];
+        drawStep=0; drawPts=[];
+        dragActive=false; dragCmdIdx=null; dragPtIdx=null;
+        mouseIsDown=false; mouseDownGrid=null;
+        updateCommandList();
+        redraw();
+    });
+
+    // ── Export actions ───────────────────────────────────────────────────────────
+    function copyToClipboard() {
+        const eb=document.getElementById('exportCode');
+        if (eb.value) { eb.select(); document.execCommand('copy'); alert('Commands array copied!'); }
+    }
+    function copyColorsToClipboard() {
+        const ec=document.getElementById('exportColors');
+        if (ec.value) { ec.select(); document.execCommand('copy'); alert('Colors array copied!'); }
+    }
+    function downloadAsText() {
+        const eb=document.getElementById('exportCode');
+        const ec=document.getElementById('exportColors');
+        if (!eb.value) return;
+        const content='Commands:\n'+eb.value+'\n\nColors:\n'+ec.value;
+        const a=document.createElement('a');
+        a.setAttribute('href','data:text/plain;charset=utf-8,'+encodeURIComponent(content));
+        a.setAttribute('download','vex_iq_commands.txt');
+        document.body.appendChild(a); a.click(); document.body.removeChild(a);
+    }
+
+    // ── Init ─────────────────────────────────────────────────────────────────────
+    updateColorButtons();
+    resizeCanvas();
+    drawPreviewCanvas([], []);
+</script>
 </body>
 </html>
