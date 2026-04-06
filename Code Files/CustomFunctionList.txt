@@ -1,14 +1,89 @@
-Startup Calibration function(void)
+initializeRandomSeed()
+Seeds the random number generator using accelerometer readings from the brain's inertial sensor on startup.
 
-Recalibration function(void)
-    For during operation to reduce error accumulation
+vexcodeInit()
+Runs initialization routines when the program starts. Currently just calls initializeRandomSeed().
 
-Line function(int), parameters(x_1,y_1,x_2,y_2)
-    int for error tracking so the program can recalibrate
+zeroGantry()
+Drives both axes backward until they hit their bumper switches, then resets all motor encoders to zero. This is the homing routine and gets called at startup and periodically during a print run.
 
-Point function(int), parameters (x_1,y_1)
-    int for error tracking so the program can recalibrate
+moveToMain(x, y, speed)
+Moves the gantry to an absolute position in the main 8x8 inch coordinate grid. Both axes move simultaneously.
 
-Arc function(int) (x_1,y_1,x_2,y_2,x_3,y_3)
-    int for error tracking so the program can recalibrate
+moveXOnly(x, speed)
+Moves only the X axis to a target position in main grid coordinates.
 
+moveYOnly(y, speed)
+Moves only the Y axis to a target position in main grid coordinates.
+
+moveToSec(sx, sy, speed)
+Converts secondary grid coordinates (centered, scaled to cookie size) to main grid coordinates and moves there. Most drawing commands go through this.
+
+secToMainX(sx) / secToMainY(sy)
+Converts a coordinate from the secondary drawing grid (radius 12 units) to the physical main grid (inches), accounting for cookie diameter and center position.
+
+clampMain(v)
+Clamps a value to the valid gantry range (0 to 8 inches) so motors never try to drive past the physical limits.
+
+inchesToDegX(inches) / inchesToDegY(inches)
+Converts a distance in inches to motor encoder degrees, applying the TUNE_X/TUNE_Y scaling factors for each axis.
+
+degToInches(deg)
+Converts motor encoder degrees back to inches. Used during calibration.
+
+syringeCheck(slot)
+Checks whether the specified syringe has icing remaining. Prints a warning on the brain screen if it is empty.
+
+indexBarrelColors()
+Slowly rotates the barrel a full 360 degrees while reading the optical sensor, recording the encoder position where each color syringe is detected. Runs once at startup before printing begins.
+
+zeroBarrel()
+Nudges the barrel motor back to encoder position 0 after a scan.
+
+findColorSlot(requestedHue)
+Finds which barrel slot best matches a requested hue value. Returns the slot index or -1 if nothing is close enough.
+
+rotateBarrelTo(targetDeg)
+Rotates the barrel to a specific encoder position.
+
+selectColor(requestedHue, heights)
+Looks up the slot for the requested hue, saves the current syringe plunger position, retracts slightly, rotates the barrel to the new color, and restores the plunger to where it left off for that slot.
+
+syringePreload(angle)
+Advances the syringe plunger a small amount before starting a line or dot, to prime the nozzle and prevent a gap at the start.
+
+syringeStart()
+Starts the syringe motor spinning forward continuously for line drawing.
+
+syringeStop()
+Stops the syringe motor, records how far the plunger moved, and updates the remaining icing estimate for the active slot.
+
+syringeDot()
+Runs the syringe forward for a fixed duration to deposit a dot, then stops and updates the remaining icing estimate.
+
+finalRetract(heights)
+Pulls the syringe plunger back to position 0 at the end of a print run so the nozzle stops dripping.
+
+incrementAndCheckCounter()
+Increments a counter after each drawing command. Every 5 commands it triggers a re-home to correct any accumulated positioning drift.
+
+drawLine(x1, y1, x2, y2, heights)
+Moves to the start point, primes the syringe, then drives both axes to the end point while the syringe runs continuously to draw a line.
+
+drawPoint(x1, y1, heights)
+Moves to a position and deposits a single dot using syringeDot().
+
+executePlan(directions, dirSize, colors, colorSize, heights)
+The main execution loop. Reads through the DIRECTIONS array command by command, calls selectColor() for each one, and dispatches to drawLine() or drawPoint() accordingly.
+
+sweepXForProng(startX, endX)
+Slowly moves the X axis while watching the distance sensor. Stops and returns the X position when a prong is detected. Used during cookie calibration.
+
+sweepYForProng(startY, endY)
+Same as sweepXForProng but on the Y axis.
+
+calibrateCookie()
+Detects three prongs arranged around the cookie rim, computes the circumcenter of the triangle they form, and writes the result into cookieDiameter, MAIN_CENTER_X, and MAIN_CENTER_Y. Currently commented out in main() but fully implemented.
+
+main()
+Entry point. Plays a startup jingle, waits for the start button, homes the gantry, indexes the barrel colors, runs executePlan(), then homes again and retracts the syringe before playing a completion jingle.

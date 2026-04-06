@@ -1,16 +1,17 @@
 Vexcode does NOT take nested arrays. As such, the webapp generates a non-nested array.
 The code takes into account the following formats; instead of having G1, G2 as commands, raw integers are used to reduce file size.
+We will refer to these integers as flags. 
 
-1 - Lines(point to point):
+Flag 1 - Lines(point to point):
 Array format:
 [1, x_1, y_1, x_2, y_2]
 
-2 - Dot(singular point):
+Flag 2 - Dot(singular point):
 Array format:
 [2, x_1, y_1, x_2, y_2]
 
-3 - Arcs/Circles(point, to guide point, to point):
-Array format:
-[3, x_1, y_1, x_2, y_2, x_3, y_3]
+Arcs are decomposed on the frontend into a series of lines, for simplicity of code and movement.
 
-The code reads the array, reading the ID first(1, 2, 3) to figure out how to process the sequential inputs in the array.
+The code reads the array, reading the flag first(1 or 2) to figure out how to process the sequential inputs in the array.
+
+After 5 movements, the code will automatically call for recalibration to reduce the drift that VEX IQ motor encoders have.
